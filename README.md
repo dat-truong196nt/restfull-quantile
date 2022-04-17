@@ -19,7 +19,7 @@
   - Data is saved periodically on disk.
   - Data will be loaded on start up.
 - High-availability:
-
+  - If the process is running, all requests will be served.
 - Scalability:
   - Have a load balancer for increasing requests.
 
@@ -75,10 +75,17 @@
     }
     ```
 
-## Build and Test:
+## Run
+### Pre-built:
+- The pre-built packages can found [here](https://github.com/dat-truong196nt/restfull-quantile/tree/main/packages).
 ### Build
-```shell
-make && build/rest_server
-```
-
+- Clone this [restfull-quantile](https://github.com/dat-truong196nt/restfull-quantile) repository.
+- Go to downloaded directory `restfull-quantile`
+- Build packages by `make` command.
+- Built packages is in the **build** folder.
+### Run
+- Go to `build/src`.
+- Run `rest_server` file.
 ### Test
+- Go to `build/test`.
+- Run `test` file.
