@@ -80,7 +80,7 @@ void Database::add(const int64_t poolId, const vector<int64_t>& values)
   } else {
     poolDb.emplace(make_pair(poolId, values));
   }
-  sort(poolDb[poolId].begin(), poolDb[poolId].end());
+  insertionSort(poolDb[poolId]);
   idRequested.emplace(poolId);
   requestCnt++;
 }

@@ -6,6 +6,7 @@
 #include <vector>
 #include <thread>
 #include <set>
+#include "helpers.hpp"
 #include "crow.h"
 
 using namespace std;
