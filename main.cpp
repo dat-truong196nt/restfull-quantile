@@ -13,7 +13,7 @@ int main()
   crow::SimpleApp app;
   crow::mustache::set_base(".");
 
-  dbHandler pool;
+  DbHandler handler;
 
   CROW_ROUTE(app, "/api/pool")
     .methods("GET"_method)
@@ -33,10 +33,11 @@ int main()
 
       int64_t poolId = jBody["poolId"].i();
       double percentile = jBody["percentile"].d();
+      auto db = handler.get_connection(poolId);
 
-      if (pool.isItemExisted(poolId)) {
-        jResp["total"] = pool.getTotal(poolId);
-        jResp["quantile"] = quantileCalculate(pool.getValues(poolId), percentile / 100);
+      if (db->is_existed(poolId)) {
+        jResp["total"] = db->get_total(poolId);
+        jResp["quantile"] = quantileCalculate(db->get_values(poolId), percentile / 100);
       } else {
         jResp["error"] = "poolId has not found. Try to create one through POST(/api/pool)";
         return crow::response(410, jResp);
@@ -70,16 +71,17 @@ int main()
 
       int64_t poolId = jBody["poolId"].i();
       vector<int64_t> values;
+      auto db = handler.get_connection(poolId);
 
       for (auto value : jBody["poolValues"]) {
         values.push_back(value.i());
       }
-      if (pool.isItemExisted(poolId)) {
+      if (db->is_existed(poolId)) {
         jResp["status"] = "appendded";
       } else {
         jResp["status"] = "inserted";
       }
-      pool.addItem(poolId, values);
+      db->add(poolId, values);
       return crow::response(jResp);
     });
 
