@@ -77,7 +77,7 @@
 
 ## Run
 ### Pre-built:
-- The pre-built packages can found [here](https://github.com/dat-truong196nt/restfull-quantile/tree/main/packages).
+- The pre-built packages can found [here](https://github.com/dat-truong196nt/restfull-quantile/tree/main/prebuild).
 ### Build
 - Clone this [restfull-quantile](https://github.com/dat-truong196nt/restfull-quantile) repository.
 - Go to downloaded directory `restfull-quantile`
