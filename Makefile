@@ -8,7 +8,7 @@ LIBS=-pthread -lboost_system
 all: clean init rest_server test
 
 rest_server: $(SRC_DIR)/helpers.cpp $(SRC_DIR)/handlers.cpp main.cpp
-	@$(CXX) $? $(LIBS) -o $(BUILD_DIR)/$(SRC_DIR)/$@
+	@$(CXX) $? $(LIBS) -o $(BUILD_DIR)/artifacts/$@
 
 test: $(SRC_DIR)/helpers.cpp $(SRC_DIR)/handlers.cpp $(TEST_DIR)/unit/unittest.cpp
 	@cp $(TEST_DIR)/api/package.json $(BUILD_DIR)/$(TEST_DIR)/api
