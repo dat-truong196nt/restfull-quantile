@@ -88,9 +88,9 @@
 - Run `rest_server` file.
 ### Test
 #### UNIT Testing
-- Go to `build/test`.
+- Go to `build/test/unit`.
 - Run `apitest` file.
 #### API Testing
-- Go to `build/test`.
-- Run `npm install`.
+- Go to `build/test/api`.
+- Install library by `npm install`.
 - Run `node apitest.js`.
