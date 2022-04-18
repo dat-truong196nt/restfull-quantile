@@ -23,6 +23,12 @@
 - Scalability:
   - Have a load balancer for increasing requests.
 
+## Diagram:
+### Request Handler
+![RequestHandler](./images/RequestHandler.diagram.png)
+### Database storing
+![FileStoring](./images/FileStoring.diagram.png)
+
 ## Usage:
 ### [POST] **/api/quantile** --- Get quantile for pool list
 - Body
