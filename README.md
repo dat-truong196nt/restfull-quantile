@@ -27,7 +27,7 @@
 ### Request Handler
 ![RequestHandler](./images/RequestHandler.diagram.png)
 ### Database storing
-![FileStoring](./images/FileStoring.diagram.png)
+![FileStoring](./images/DatabaseStoring.diagram.png)
 
 ## Usage:
 ### [POST] **/api/quantile** --- Get quantile for pool list
