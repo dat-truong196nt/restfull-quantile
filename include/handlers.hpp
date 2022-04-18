@@ -37,7 +37,7 @@ class Database
 
     void run();
     void write(set<int64_t> writeList);
-    void add(const int64_t poolId, const vector<int64_t>& values);
+    status add(const int64_t poolId, const vector<int64_t>& values);
     int get_total(int64_t poolId);
     bool is_existed(const int64_t poolId) { return poolDb.find(poolId) != poolDb.end(); }
     vector<int64_t> get_values(const int64_t poolId) { return poolDb[poolId]; }

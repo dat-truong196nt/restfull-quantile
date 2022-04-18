@@ -73,16 +73,22 @@ void Database::parse_str_to_map(string& line)
   poolDb.emplace(make_pair(poolId, values));
 }
 
-void Database::add(const int64_t poolId, const vector<int64_t>& values)
+status Database::add(const int64_t poolId, const vector<int64_t>& values)
 {
+  status _status = status::FAILED;
+
   if (is_existed(poolId)) {
     poolDb[poolId].insert(poolDb[poolId].end(), values.begin(), values.end());
+    _status = status::APPENDED;
   } else {
     poolDb.emplace(make_pair(poolId, values));
+    _status = status::INSERTED;
   }
   insertionSort(poolDb[poolId]);
   idRequested.emplace(poolId);
   requestCnt++;
+
+  return _status;
 }
 
 int Database::get_total(int64_t poolId)

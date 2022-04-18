@@ -76,12 +76,8 @@ int main()
       for (auto value : jBody["poolValues"]) {
         values.push_back(value.i());
       }
-      if (db->is_existed(poolId)) {
-        jResp["status"] = "appendded";
-      } else {
-        jResp["status"] = "inserted";
-      }
-      db->add(poolId, values);
+      jResp["status"] = getStatusStr(db->add(poolId, values));
+
       return crow::response(jResp);
     });
 
