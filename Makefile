@@ -17,7 +17,7 @@ test: $(SRC_DIR)/helpers.cpp $(SRC_DIR)/handlers.cpp $(TEST_DIR)/unit/unittest.c
 	@$(CXX) $? $(LIBS) -o $(BUILD_DIR)/$(TEST_DIR)/unit/unittest
 
 init:
-	@mkdir -p $(BUILD_DIR)/$(TEST_DIR)/api $(BUILD_DIR)/$(TEST_DIR)/unit $(BUILD_DIR)/$(SRC_DIR)
+	@mkdir -p $(BUILD_DIR)/$(TEST_DIR)/api $(BUILD_DIR)/$(TEST_DIR)/unit $(BUILD_DIR)/artifacts
 
 clean:
 	@rm -rf $(BUILD_DIR)
