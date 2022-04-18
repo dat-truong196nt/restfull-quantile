@@ -164,5 +164,5 @@ if(await api_check_get_quantile() !== true) {
   passed++;
 }
 
-console.log(`API Testing: passed ${passed}/${total} tests`);
+console.log(`API Testing: passed ${passed}/${total} test cases.`);
 console.log();

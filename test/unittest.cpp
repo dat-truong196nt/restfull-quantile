@@ -39,9 +39,9 @@ bool UnitTest::helpers_check_quantileCalculate()
 {
   vector<int64_t> values = {-6, -3, 1, 2, 5, 8};
   float quantile = 58.6;
-  int64_t expectedResult = 1;
+  int64_t expectedResult = 2;
 
-  return expectedResult == quantileCalculate(values, quantile);
+  return expectedResult == quantileCalculate(values, quantile / 100);
 }
 
 bool UnitTest::database_check_get_total()
@@ -75,11 +75,12 @@ bool UnitTest::database_check_add()
   int64_t existedPoolId = 456;
   int64_t invalidPoolId = 257;
   vector<int64_t> values = {-6, 7, 2, -8};
+  vector<int64_t> valuesSorted = {-8, -6, 2, 7};
   vector<int64_t> expectedResult = {-8, -6, 2, 4, 7, 7, 89, 110};
   db->add(existedPoolId, values);
   db->add(invalidPoolId, values);
 
-  return expectedResult == db->get_values(existedPoolId)  && values == db->get_values(invalidPoolId);
+  return expectedResult == db->get_values(existedPoolId)  && valuesSorted == db->get_values(invalidPoolId);
 }
 
 void UnitTest::run()
@@ -88,50 +89,56 @@ void UnitTest::run()
 
   total++;
   if (!helpers_check_insertionSort()) {
-    cerr << "insertionSort failed" << endl;
+    cerr << "Failed: helpers_check_insertionSort" << endl;
   } else {
+    cerr << "Passed: helpers_check_insertionSort" << endl;
     passed++;
   }
 
   total++;
   if (!helpers_check_quantileCalculate()) {
-    cerr << "insertionSort failed" << endl;
+    cerr << "Failed: helpers_check_quantileCalculate" << endl;
   } else {
+    cerr << "Passed: helpers_check_quantileCalculate" << endl;
     passed++;
   }
 
   total++;
   if (!database_check_get_total()) {
-    cerr << "insertionSort failed" << endl;
+    cerr << "Failed: database_check_get_total" << endl;
   } else {
+    cerr << "Passed: database_check_get_total" << endl;
     passed++;
   }
 
   total++;
   if (!database_check_is_existed()) {
-    cerr << "insertionSort failed" << endl;
+    cerr << "Failed: database_check_is_existed" << endl;
   } else {
+    cerr << "Passed: database_check_is_existed" << endl;
     passed++;
   }
 
   total++;
   if (!database_check_add()) {
-    cerr << "insertionSort failed" << endl;
+    cerr << "Failed: database_check_add" << endl;
   } else {
+    cerr << "Passed: database_check_add" << endl;
     passed++;
   }
 
-  cout << "Passed " << passed << " on " << total << " tests." << endl;
+  cout << "UNIT Testing: passed " << passed << "/" << total << " test cases." << endl;
+  cout << endl;
 }
 
 UnitTest::UnitTest(/* args */)
 {
-  stringstream cmd;
-  cmd << "rm -f " << DB_TEST;
-  system(cmd.str().c_str());
-  cmd.clear();
-  cmd << "cp " << DB_TMP << " " << DB_TEST;
-  system(cmd.str().c_str());
+  stringstream cmdClean;
+  cmdClean << "rm -f " << DB_TEST;
+  system(cmdClean.str().c_str());
+  stringstream cmdCopy;
+  cmdCopy << "cp " << DB_TMP << " " << DB_TEST;
+  system(cmdCopy.str().c_str());
   db = new Database(DB_TEST);
 }
 
