@@ -36,7 +36,7 @@ class Database
   public:
     void run();
     void add(const int64_t poolId, const vector<int64_t>& values);
-    int get_total(int64_t poolId) { return poolDb[poolId].size(); }
+    int get_total(int64_t poolId);
     bool is_existed(const int64_t poolId) { return poolDb.find(poolId) != poolDb.end(); }
     vector<int64_t> get_values(const int64_t poolId) { return poolDb[poolId]; }
     Database(const string& file);

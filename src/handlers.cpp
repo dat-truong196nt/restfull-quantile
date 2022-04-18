@@ -85,6 +85,14 @@ void Database::add(const int64_t poolId, const vector<int64_t>& values)
   requestCnt++;
 }
 
+int Database::get_total(int64_t poolId)
+{
+  if (is_existed(poolId))
+    return poolDb[poolId].size();
+  else
+    return 0;
+}
+
 void Database::print()
 {
   stringstream ss;
