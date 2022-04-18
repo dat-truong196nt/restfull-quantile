@@ -24,7 +24,7 @@
   - Have a load balancer for increasing requests.
 
 ## Usage:
-### [GET] **/api/pool** --- Get percentile for pool list
+### [POST] **/api/quantile** --- Get quantile for pool list
 - Body
   ```json
   {
@@ -53,7 +53,7 @@
     }
     ```
 
-### [POST] **/api/pool** --- Add values to pool list
+### [POST] **/api/add** --- Add values to pool list
 - Body
   ```json
   {

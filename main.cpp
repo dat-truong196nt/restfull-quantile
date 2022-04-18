@@ -15,8 +15,8 @@ int main()
 
   DbHandler handler;
 
-  CROW_ROUTE(app, "/api/pool")
-    .methods("GET"_method)
+  CROW_ROUTE(app, "/api/quantile")
+    .methods("POST"_method)
     ([&](const crow::request &req) {
       crow::json::wvalue jResp;
       auto jBody = crow::json::load(req.body);
@@ -31,7 +31,7 @@ int main()
         return crow::response(400, jResp);
       }
 
-      int64_t poolId = jBody["poolId"].i();
+      int64_t poolId = jBody["poolId"].d();
       double percentile = jBody["percentile"].d();
       auto db = handler.get_connection(poolId);
 
@@ -46,7 +46,7 @@ int main()
     });
 
 
-  CROW_ROUTE(app, "/api/pool")
+  CROW_ROUTE(app, "/api/add")
     .methods("POST"_method)
     ([&](const crow::request &req) {
       crow::json::wvalue jResp;
@@ -69,7 +69,7 @@ int main()
         }
       }
 
-      int64_t poolId = jBody["poolId"].i();
+      int64_t poolId = jBody["poolId"].d();
       vector<int64_t> values;
       auto db = handler.get_connection(poolId);
 
