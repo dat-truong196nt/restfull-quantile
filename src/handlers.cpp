@@ -143,22 +143,26 @@ void Database::write(vector<int64_t> writeList)
 
 DbHandler::DbHandler()
 {
-  for (auto name : INSTANCES) {
-    auto *db = new Database(name);
-    thread(&Database::run, db).detach();
-    instances.push_back(db);
-  }
-
-  instance_cnt = instances.size();
+  dbList = vector<string>(INSTANCES);
+  instanceCnt = MAX_INSTANCE;
 }
 
 DbHandler::~DbHandler() {
   for (auto instance : instances) {
-    delete instance;
+    delete instance.second;
   }
 }
 
 Database* DbHandler::get_connection(int64_t poolId)
 {
-  return instances.at(poolId % instance_cnt);
+  const int instanceId = poolId % instanceCnt;
+
+  if (instances.find(instanceId) != instances.end()) {
+    return instances[instanceId];
+  } else {
+    auto *db = new Database(dbList[instanceId]);
+    thread(&Database::run, db).detach();
+    instances[instanceId] = db;
+    return db;
+  }
 }

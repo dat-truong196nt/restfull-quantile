@@ -12,6 +12,7 @@
 using namespace std;
 
 #define INSTANCES {"pool_0", "pool_1", "pool_2", "pool_3", "pool_4"}
+#define MAX_INSTANCE 5
 #define DB_ID_VALUES_SPLIT_CHAR "/"
 #define MAX_REQUEST 5000 // requests
 #define MAX_TIME_OUT 300 // seconds
@@ -46,8 +47,9 @@ class Database
 class DbHandler
 {
 private:
-  vector<Database*> instances;
-  int instance_cnt;
+  map<int, Database*> instances;
+  vector<string> dbList;
+  int instanceCnt;
 public:
   Database* get_connection(int64_t poolId);
   DbHandler();
