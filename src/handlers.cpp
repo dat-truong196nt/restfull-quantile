@@ -49,7 +49,7 @@ void Database::run()
     sleep(1);
     timeoutCnt++;
     if (requestCnt > MAX_REQUEST || timeoutCnt > MAX_TIME_OUT) {
-      thread _wThread(&Database::write, this, vector<int64_t>(idRequested.begin(), idRequested.end()));
+      thread _wThread(&Database::write, this, set<int64_t>(idRequested.begin(), idRequested.end()));
       _wThread.detach();
       reset_counter();
       idRequested.clear();
@@ -129,7 +129,7 @@ int Database::append(int64_t poolId)
   return system(cmd.str().c_str());
 }
 
-void Database::write(vector<int64_t> writeList)
+void Database::write(set<int64_t> writeList)
 {
   pthread_mutex_lock(&lock);
 
@@ -149,6 +149,7 @@ DbHandler::DbHandler()
 
 DbHandler::~DbHandler() {
   for (auto instance : instances) {
+    instance.second->write(instance.second->idRequested);
     delete instance.second;
   }
 }
