@@ -22,6 +22,7 @@
   - If the process is running, all requests will be served.
 - Scalability:
   - Have a load balancer for increasing requests.
+  - Only init instance on demand.
 
 ## Diagram:
 ### Request Handler
